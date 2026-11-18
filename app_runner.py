@@ -23,31 +23,25 @@ def run(stage, breadth_first, depth_first, shortest_hop_path, personal_case):
     bfs_order, bfs_trace, bfs_edges = breadth_first(GRAPH, START)
     dfs_order, dfs_trace, dfs_edges = depth_first(GRAPH, START)
     print_color("\nReachability from " + START, "heading")
-    show_list("Reached rooms: ", bfs_order, "success")
+    show_list("Reached rooms: ", bfs_order)
     not_reached = []
     for node in GRAPH:
         if node not in bfs_order:
             not_reached.append(node)
     if not_reached:
-        show_list("Not reached: ", not_reached, "caution")
+        show_list("Not reached: ", not_reached)
     show_traversal("BFS - queue front left", bfs_order, bfs_trace, bfs_edges, "Discovered")
     show_traversal("DFS - stack top right", dfs_order, dfs_trace, dfs_edges, "Processed so far")
-    print_color(
-        "Pending DFS entries already processed are skipped; visit order is not a walking route.",
-        "caution",
-    )
-    print_color("Core traversal is O(V + E); teaching snapshots and sorting add work.", "code")
+    print("Pending DFS entries already processed are skipped; visit order is not a walking route.")
+    print("Core traversal is O(V + E); teaching snapshots and sorting add work.")
     if stage == 3:
         baseline, baseline_parents = shortest_hop_path(GRAPH, START, GOAL)
         show_route("All rooms available: Entrance to Loading", baseline)
         print_color("\nPersonal restriction case " + personal_case, "heading")
         if blocked:
-            print_color("Rooms to avoid: " + ", ".join(blocked), "caution")
+            print("Rooms to avoid: " + ", ".join(blocked))
         else:
-            print_color("No rooms blocked in this command-line run.", "success")
+            print("No rooms blocked in this command-line run.")
         restricted, restricted_parents = shortest_hop_path(GRAPH, START, GOAL, blocked)
         show_route("Route under the selected restriction", restricted)
-        print_color(
-            "Fewest hops under this model; distance and travel time are not represented.",
-            "code",
-        )
+        print("Fewest hops under this model; distance and travel time are not represented.")

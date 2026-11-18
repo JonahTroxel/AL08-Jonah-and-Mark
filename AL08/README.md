@@ -1,0 +1,48 @@
+# AL08: Workshop Access — Traversal and Restricted Routes
+
+Name: [your name]
+Partner(s): [names, or note if completed individually]
+Issued personal case: [confirm A, B, or C with your instructor]
+
+## Run
+
+```powershell
+py -3.14 main.py
+py -3.14 test_assignment.py
+```
+
+Both files are set to stage 3. `MY_RESTRICTION` currently remains at the starter's
+default of A until the instructor-issued case is confirmed.
+
+## Work Notes
+
+- **Model:** The 12 room names are graph nodes; neighbor lists represent direct,
+  two-way passages. The model omits distances, travel time, opening hours,
+  accessibility, and capacity. Annex is valid as a disconnected node because its
+  declared neighbor list is empty.
+- **Model check:** The tests remove the Reception-to-Office reference from a copy
+  and check that validation reports the missing reciprocal connection. They also
+  add an unknown reference, then repair both issues and confirm the supplied graph
+  was not changed.
+- **Traversal:** BFS marks rooms discovered when enqueuing them; DFS uses a stack,
+  marks rooms when processing popped entries, and skips repeats. Each reaches the
+  11 rooms in Entrance's component and examines 26 adjacency entries; Annex is
+  not reached. The core traversal work is O(V + E), excluding validation and
+  trace-snapshot overhead.
+- **Routes:** With all rooms available, the fewest-hop route is Entrance →
+  Reception → Office → Loading (three passages). Tests also cover all three
+  restriction cases; update the saved case and this note after confirming your
+  assigned case.
+- **Collaboration and personal learning:** [Add your own question/decision,
+  contribution, and learning observation.]
+
+## Assistance
+
+Copilot assisted with drafting the traversal and route functions and focused
+tests. The generated work was checked by running `python test_assignment.py` and
+`python main.py`; both completed successfully. Review the implementation and make
+sure you can explain its data structures and test expectations before submitting.
+
+## Instructor Comments
+
+[Reserved for instructor feedback.]
